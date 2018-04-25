@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>解构</title>
+	</head>
+
+	<body>
+		<div id="result"></div>
+	</body>
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	import animal from 'ES6';
+
+	<script>
+  //基本用法
+	let [foo,[[bar],baz]] = [1,[[2],3]]
+	console.log(foo)
+	console.log(bar)
+	console.log(baz)
+
+	let [head, ...tail] = [1,2,3,4];
+	console.log(head)
+	console.log(tail)
+
+	let [x,y,z] = [5,6,7,8]
+	console.log(x)
+	console.log(y)
+	console.log(z)
+
+	let [a,[b],d] = [1,[2,3],4]
+	console.log(a)
+	console.log(b)
+	console.log(d)
+
+	let [v,n = 'b'] = ['a',undefined];
+	console.log(v)
+	console.log(n)
+
+	let [q,w = '1'] = ['a',null]
+	console.log(q)
+	console.log(w)
+
+  function f() {
+		console.log('aaa')
+	}
+	let [t = f()] = [1]
+	console.log(t)
+
+	function f2() {
+		console.log('aaa')
+	}
+	let r;
+	if([1][0] === undefined){
+		r = f2();
+	} else {
+		r = [100][0]
+	}
+	console.log(r)
+
+	let [m = 1, k = m] = []
+	console.log(m)
+	console.log(k)
+	{
+		let a,b;
+		({a,b} = {a:1,b:2})
+		console.log(a,b)
+	}
+	// 解构赋值的应用场景
+	{ //适用于变量交换 es5需要用到中间值
+		let a = 1;
+		let b = 2;
+		[a,b] = [b,a]
+		console.log(a,b)
+	}
+	{
+		function f(){
+			return [1,2]
+		}
+		let a,b;
+		[a,b] = f()
+		console.log(a,b)
+	}
+
+	{
+		function f(){
+			return [1,2,3,4,5]
+		}
+		let a,b,c;
+		[a,,,b] = f();
+		console.log(a,b)
+	}
+	{
+		function f(){
+			return [1,2,3,4,5]
+		}
+		let a,b,c;
+		[a,,...b] = f();
+		console.log(a,b)
+	}
+	{//对象的解构赋值是按照key value去一一匹配的 左右对应
+		let o = {p:42,q:true}
+		let {p,q} = o;
+		console.log(p,q)
+	}
+	{//对象解构的默认值
+		let {a=10,b=5} = {a:3};//b后面没有赋值所以b是5
+		console.log(a,b);
+	}
+	{//对象解构赋值的应用场景 一一对应
+		let metaData = {
+			title:'abc',
+			test:[{
+				title:'test',
+				des:'description'
+			}]
+		}
+		let {title:esTitle,test:[{title:cnTitle}]} = metaData;
+		console.log(esTitle,cnTitle)
+	}
+	</script>

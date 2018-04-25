@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>set map</title>
+	</head>
+
+	<body>
+		<div id="result"></div>
+	</body>
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	import animal from 'ES6';
+
+	<script>
+	{
+		let list = new Set();
+		list.add(5); //添加还有delete...
+		list.add(6);
+		console.log('size',list.size); //size相当于length
+	}
+	{
+		let arr = [1,2,3,4,5];
+		let list = new Set(arr);
+
+		console.log('size',list.size)
+	}
+	{
+		let list = new Set()
+		list.add(1);
+		list.add(2);
+		list.add(1);
+
+		console.log(list);
+
+	}
+	</script>

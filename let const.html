@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>let const</title>
+	</head>
+
+	<body>
+		<div id="result"></div>
+	</body>
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	import animal from 'ES6';
+
+	<script>
+		//let和var的区别
+		var a = [];
+		for(var i = 0; i < 10; i++) {
+			a[i] = function() {
+				console.log(i+'for里面的var');
+			};
+		}
+		a[5]();//100
+
+		var a = [];
+		for(let i = 0; i < 100; i++) {
+			a[i] = function() {
+				console.log(i+'for里面的let');
+			};
+		}
+		a[5]();//5
+
+		//变量提升
+		let dd
+		console.log(dd)
+		dd = 3
+		console.log(bar1)
+		var bar1 = 9
+		// console.log(bar)
+		// let bar = 8
+		// 暂时性死区
+		if(true){
+			// tep = 'abc';
+			// console.log(tmp)
+			let temp;
+			console.log(temp)
+
+			temp = 123
+			console.log(temp)
+		}
+		//不能重复声明
+		function func(){
+			let a = 10
+			var a = 1
+		}
+		function func() {
+		  let a = 10;
+		  let a = 1;
+		}
+		// 变量提升 导致函数执行的时候执行里面的的tmp 先从函数自己内部找 有声明tmp 但是先声明的所以就undefind
+		var tmp = new Date()
+		function f(){
+			console.log('tmp值',tmp);
+			if(false){
+				var tmp = 'hello es6'
+			}
+		}
+		f();
+		// 自己函数内部没有temp1 所以tmp1是从外面拿的
+		var tmp1 = new Date()
+		function f1(){
+			console.log('tmp1值',tmp1);
+			if(false){
+				var tmp2 = 'hello es6'
+			}
+		}
+		f1();
+		// let只在自己的if那块代码块有效所以 temp3拿的是var的
+		var tmp3 = new Date()
+		function f2(){
+			console.log('tmp3值',tmp3);
+			if(false){
+				let tmp3 = 'hello es6'
+			}
+		}
+		f2();
+		// i的变量泄露
+	  var s = 'hello';
+		console.log(s.length)
+		for(var i = 0; i < s.length; i++){
+			console.log(s[i]);
+		}
+		console.log(i)
+		//
+		function test(){
+			let n = 5;
+			if(true){
+				let n = 10;
+			}
+			console.log(n)
+		}
+		test()
+		function test1(){
+			var n = 5;
+			if(true){
+				var n = 10;
+			}
+			console.log(n)
+		}
+		test1()
+		// const
+		// const foo = {};
+		// foo.a = 1212;
+		// console.log(foo)
+		// foo = {}
+		const foo = Object.freeze({})
+		foo.prop = 122;
+		foo.prop = 666;
+		console.log(foo)//空对象
+
+		// 顶层对象 es6开始变的不一样
+		var a = 1;
+		console.log(window.a)
+
+		let b = 1;
+		console.log(window.b)
+
+		//原型 继承 构造函数
+		// class Animal {
+		// 	constructor() { //构造函数
+		// 		this.type = 'animal'
+		// 	}
+		// 	says(say) {
+		// 		console.log(this.type + ' says ' + say)
+		// 	}
+		// }
+		// let animal = new Animal();
+		// animal.says('helloxiaoyaya')
+		//
+		// class Cat extends Animal {
+		// 	constructor() {
+		// 		super() //super关键字指代父类的实例（即父类的this对象）
+		// 		this.type = 'cat'
+		// 	}
+		// }
+		// let cat = new Cat()
+		// cat.says('hello');
+		//
+		// //arrow function
+		// (i) => i + 1;
+		// (x, y) => {
+		// 	x++;
+		// 	y--;
+		// 	return x + y;
+		// };
+		// //this对象指向
+		// class AnimalTwo {
+		// 	constructor() {
+		// 		this.type = 'animaltwo'
+		// 	}
+		// 	//			says(say) {
+		// 	//				setTimeout(function() { //setTimeout中this的指向永远是window
+		// 	//					console.log(this.type + ' says ' + say)
+		// 	//				}, 1000)
+		// 	//			}
+		// 	//			says(say) {
+		// 	//				var self = this; //指定this指向self
+		// 	//				setTimeout(function() {
+		// 	//					console.log(self.type + ' says ' + say)
+		// 	//				}, 1000)
+		// 	//			};
+		// 	says(say) {
+		// 		setTimeout(function() {
+		// 			console.log(this.type + ' says ' + say)
+		// 		}.bind(this), 1000)
+		// 	}
+		// }
+		// var animals = new AnimalTwo()
+		// animals.says('hi')
+		// console.log(animals.says('hi'));
+		// //es6箭头函数
+		// class AnimalArrow {
+		// 	constructor() {
+		// 		this.type = 'AnimalArrow'
+		// 	}
+		// 	says(say) {
+		// 		setTimeout(() => {
+		// 			console.log(this.type + ' says ' + say)
+		// 		}, 1000)
+		// 	}
+		// }
+		// var animalaro = new AnimalArrow();
+		// animalaro.says('hi')
+		//
+		// $("#result").append(
+		// 	"There are <b>" + 'basket.count' + "</b> " +
+		// 	"items in your basket, " +
+		// 	"<em>" + 'basket.onSale' +
+		// 	"</em> are on sale!"
+		// );
+		// $("#result").append(`
+		//   There are <b>basket.count</b> items
+		//    in your basket, <em>basket.onSale</em>
+		//   are on sale!
+		// `);
+		//
+		// function animalThree(type) {
+		// 	type = type || 'line'
+		// 	console.log(type)
+		// }
+		// animalThree();
+		//
+		// function animalFive(type = 'lineTwo') {
+		// 	console.log(type)
+		// }
+		// animalFive();
+		// function animalfour(arg1, arg2, arg3, arg4) {
+		// 	console.log(arg1);
+		// 	console.log(arg2);
+		// 	console.log(arg3);
+		// 	console.log(arg4);
+		// }
+		// animalfour('cat', 'dog', 'fish', 'apple')
+		//
+		// //promise对象
+		// let promise = new Promise(function(resolve, reject) {
+		// 	console.log('Promise');
+		// 	resolve();
+		// });
+		//
+		// promise.then(function() {
+		// 	console.log('resolved.');
+		// });
+		//
+		// //解构函数
+		// let cat1 = 'ken';
+		// let dog1 = 'lili';
+		// let zoo1 = {cat: cat1,dog:dog1};
+		// console.log(zoo1);
+		//
+		// //map和filter区别
+		// let arr = [1,2,3,4];
+		// let newArr = arr.map(function(item){
+		// 	if (item % 2 !== 0){
+		// 		return item;
+		// 	}
+		// })
+		// console.log(newArr);
+		// let arr1 = [1,2,3,4];
+		// let newArr1 = arr1.filter(function(item){
+		// 	if (item % 2 !== 0){
+		// 		return item;
+		// 	}
+		// })
+		// console.log(newArr1);
+	</script>
+
+</html>
